@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resep – Dapur Ghany</title>
+
+    <style>
+        :root{
+            --bg: #f5f7fa;
+            --text: #1e293b;
+            --card: #ffffff;
+            --primary: #ff6b6b;
+            --primary-dark: #e45757;
+            --muted:#64748b;
+        }
+        .dark {
+            --bg: #1a1c1f;
+            --text: #e3e8ef;
+            --card: #2a2d31;
+            --primary: #ff7676;
+            --primary-dark: #c94f4f;
+            --muted:#a5b4c3;
+        }
+
+        body{
+            margin:0;
+            background:var(--bg);
+            font-family: Poppins, Arial, sans-serif;
+            color:var(--text);
+            transition:.3s;
+        }
+
+        header{
+            background:var(--card);
+            box-shadow:0 4px 10px rgba(0,0,0,0.05);
+            padding:14px 24px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            position:sticky;
+            top:0;
+            z-index:100;
+        }
+        .logo{
+            font-size:20px;
+            font-weight:700;
+            color:var(--primary);
+        }
+        .search-box input{
+            padding:10px 14px;
+            width:240px;
+            border-radius:10px;
+            border:1px solid #ddd;
+            background:var(--bg);
+            color:var(--text);
+        }
+        #themeToggle{
+            cursor:pointer;
+            background:none;
+            border:none;
+            font-size:22px;
+            margin-left:12px;
+            color:var(--text);
+        }
+
+        /* ========== HERO VIDEO BACKGROUND ========== */
+        .hero{
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .hero-video{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .hero-overlay{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.45);
+        }
+        .hero-content{
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+        }
+        .hero-content h1{
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .hero-content p{
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        .container{ padding:24px; }
+        .grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap:20px;
+        }
+        .card{
+            background:var(--card);
+            border-radius:16px;
+            overflow:hidden;
+            box-shadow:0 4px 14px rgba(0,0,0,0.08);
+            transition:.2s;
+            cursor:pointer;
+        }
+        .card:hover{
+            transform:translateY(-6px);
+            box-shadow:0 8px 20px rgba(0,0,0,0.12);
+        }
+        .card img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+        }
+        .card-content{ padding:14px; }
+        .card-content h3{
+            margin:0 0 6px;
+            font-size:16px;
+            font-weight:700;
+            color:var(--text);
+        }
+        .card-content p{
+            font-size:14px;
+            color:var(--muted);
+            margin:0 0 10px;
+        }
+        .btn{
+            display:inline-block;
+            padding:8px 12px;
+            background:var(--primary);
+            color:white;
+            border-radius:8px;
+            text-decoration:none;
+            font-size:13px;
+            font-weight:600;
+        }
+        .btn:hover{ background:var(--primary-dark); }
+
+        /* ========== FORM FEEDBACK ========== */
+        .feedback-box{
+            margin-top:40px;
+            background:var(--card);
+            padding:20px;
+            border-radius:14px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.07);
+        }
+        .feedback-box input,
+        .feedback-box textarea,
+        .feedback-box select{
+            width:100%;
+            padding:10px;
+            border-radius:8px;
+            border:1px solid #ccc;
+            margin-bottom:12px;
+            background:var(--bg);
+            color:var(--text);
+        }
+        .feedback-btn{
+            padding:10px 14px;
+            background:var(--primary);
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:600;
+        }
+        .feedback-btn:hover{ background:var(--primary-dark); }
+
+        footer{
+            padding:20px;
+            text-align:center;
+            font-size:13px;
+            color:var(--muted);
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- HERO VIDEO BACKGROUND -->
+    <div class="hero">
+        <video class="hero-video" autoplay muted loop>
+            <source src="iklan_makanan.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h1>Selamat Datang di Dapur Ghany</h1>
+            <p> resep makanan & Minuman yang menggugah selera!</p>
+        </div>
+    </div> 
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="logo">Resep Dapur Ghany</div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari resep...">
+            </div>
+            <button id="themeToggle">🌙</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <h2 style="margin-bottom: 16px;">Katalog Resep</h2>
+
+        <!-- GRID RESEP -->
+        <div class="grid" id="recipeGrid">
+
+            <div class="card" data-name="nasi goreng spesial nasi goreng">
+                <img src="nasigoreng.jpg">
+                <div class="card-content">
+                    <h3>🍚 Nasi Goreng Spesial</h3>
+                    <p>Nasi goreng dengan ayam, telur dan rempah khas.</p>
+                    <a href="nasigoreng.html" class="btn">Lihat Resep</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="sate ayam kacang sate">
+                <img src="sateayam.jpg">
+                <div class="card-content">
+                    <h3>🍢 Sate Ayam Kacang</h3>
+                    <p>Daging ayam panggang dengan bumbu kacang gurih.</p>
+                    <a href="sateayambumbukacang.html" class="btn">Lihat Resep</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="es cendol minuman">
+                <img src="cendol.jpg">
+                <div class="card-content">
+                    <h3>🥤 Es Cendol Segar</h3>
+                    <p>Cendol hijau dengan santan dan gula merah cair.</p>
+                    <a href="cendol.html" class="btn">Lihat Resep</a>
+                </div>
+            </div>
+
+            <div class="card" data-name="jus alpukat coklat">
+                <img src="jusalpukatcoklat.jpg">
+                <div class="card-content">
+                    <h3>🥑 Jus Alpukat Coklat</h3>
+                    <p>Minuman creamy dengan saus coklat kental.</p>
+                    <a href="jusalpukatcoklat.html" class="btn">Lihat Resep</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FORM FEEDBACK -->
+        <div class="feedback-box">
+            <h2>💬 Beri Penilaian</h2>
+
+            <input type="text" id="fbNama" placeholder="Nama Anda">
+            <input type="email" id="fbEmail" placeholder="Email Anda">
+            <select id="fbRating">
+                <option value="5">⭐⭐⭐⭐⭐ – Sangat Bagus</option>
+                <option value="4">⭐⭐⭐⭐ – Bagus</option>
+                <option value="3">⭐⭐⭐ – Cukup</option>
+                <option value="2">⭐⭐ – Kurang</option>
+                <option value="1">⭐ – Buruk</option>
+            </select>
+            <textarea id="fbPesan" rows="4" placeholder="Tulis masukan Anda..."></textarea>
+
+            <button class="feedback-btn" onclick="kirimFeedback()">Kirim</button>
+            <p id="fbStatus" style="margin-top:10px; font-weight:600;"></p>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2025 – Resep Ghany
+    </footer>
+
+    <script>
+        // SEARCH
+        const input = document.getElementById("searchInput");
+        const cards = document.querySelectorAll(".card");
+
+        input.addEventListener("input", () => {
+            const q = input.value.toLowerCase();
+            cards.forEach(card => {
+                const name = card.dataset.name;
+                card.style.display = name.includes(q) ? "block" : "none";
+            });
+        });
+
+        // DARK MODE
+        const toggle = document.getElementById("themeToggle");
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+        });
+
+        // FEEDBACK
+        function kirimFeedback(){
+            let nama = document.getElementById("fbNama").value;
+            let email = document.getElementById("fbEmail").value;
+            let pesan = document.getElementById("fbPesan").value;
+
+            if(nama === "" || email === "" || pesan === ""){
+                fbStatus.textContent = "❌ Semua field wajib diisi!";
+                fbStatus.style.color = "red";
+            } else {
+                fbStatus.textContent = "✔ berhasil dikirim. Terima kasih!";
+                fbStatus.style.color = "green";
+
+                fbNama.value = "";
+                fbEmail.value = "";
+                fbPesan.value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
